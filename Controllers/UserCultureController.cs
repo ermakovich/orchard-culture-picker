@@ -35,8 +35,6 @@ namespace Orchard.CulturePicker.Controllers {
                 }
             }
 
-            SaveCultureCookie(cultureName);
-
             //support for Orchard < 1.6
             //TODO: discontinue in 2013 Q2
             Version orchardVersion = Utils.GetOrchardVersion();
@@ -51,28 +49,5 @@ namespace Orchard.CulturePicker.Controllers {
 
             return this.RedirectLocal(returnUrl);
         }
-
-        #region Helpers
-
-        //Saves culture information to cookie
-        private void SaveCultureCookie(string cultureName) {
-            HttpContextBase httpContext = Services.WorkContext.HttpContext;
-            HttpRequestBase request = httpContext.Request;
-
-            var cultureCookie = new HttpCookie(CookieCultureSelector.CultureCookieName);
-            cultureCookie.Values.Add(CookieCultureSelector.CurrentCultureFieldName, cultureName);
-            cultureCookie.Expires = DateTime.Now.AddYears(1);
-
-            //setting up domain for cookie allows to share it to sub-domains as well
-            //if non-default port is used, we consider it as a testing environment without sub-domains
-            if (request.Url != null && request.Url.IsDefaultPort) {
-                // '.' prefix means, that cookie will be shared to sub-domains
-                cultureCookie.Domain = "." + request.Url.Host;
-            }
-
-            httpContext.Response.Cookies.Add(cultureCookie);
-        }
-
-        #endregion
     }
 }

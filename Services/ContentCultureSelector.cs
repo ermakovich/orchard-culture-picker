@@ -5,6 +5,8 @@ using Orchard.Alias;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
 using Orchard.Localization.Services;
+using Orchard.UI.Notify;
+using Orchard.Localization;
 
 namespace Orchard.CulturePicker.Services {
     public class ContentCultureSelector : ICultureSelector {
@@ -36,16 +38,17 @@ namespace Orchard.CulturePicker.Services {
         #region Helpers
 
         private CultureSelectorResult EvaluateResult(HttpContextBase context) {
-            if (context == null || context.Request == null) {
+            if (context == null 
+                || context.Request == null 
+                || context.Request.RequestContext == null 
+                || context.Request.RequestContext.RouteData == null) {
                 return null;
             }
 
-            //TODO: check for a more efficient way to get content item for the current request
-            string relativePath = Utils.GetAppRelativePath(context.Request.Url.AbsolutePath, context.Request);
-            relativePath = HttpUtility.UrlDecode(relativePath);
-            RouteValueDictionary routeValueDictionary = _aliasService.Get(relativePath);
+            var routeValueDictionary = context.Request.RequestContext.RouteData.Values;
 
-            if (routeValueDictionary == null) {
+            if (routeValueDictionary == null
+                || String.IsNullOrEmpty(routeValueDictionary["Id"] as string)) {
                 return null;
             }
 

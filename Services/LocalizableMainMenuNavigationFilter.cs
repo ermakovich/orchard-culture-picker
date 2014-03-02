@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
-using Orchard.Core.Navigation.Models;
+using Orchard.ContentPicker.Models;
 using Orchard.Environment.Extensions;
 using Orchard.Localization.Services;
 using Orchard.UI.Navigation;

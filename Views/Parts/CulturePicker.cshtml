@@ -17,8 +17,5 @@
 }
 
 @using (Html.BeginForm("ChangeCulture", "UserCulture", new {Area = "Orchard.CulturePicker"})) {
-    <div class="changeCulture">
-        <label for="CultureName">@T("Language")</label>
-        @Html.DropDownList("CultureName", new SelectList(availableCultureswithNames, "Key", "Value", Model.UserCulture), new {onchange = "submit()"})
-    </div>
+    @Html.DropDownList("CultureName", new SelectList(availableCultureswithNames, "Key", "Value", Model.UserCulture), new {onchange = "submit()"})
 }
