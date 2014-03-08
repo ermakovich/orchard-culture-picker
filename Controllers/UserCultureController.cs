@@ -35,16 +35,8 @@ namespace Orchard.CulturePicker.Controllers {
                 }
             }
 
-            //support for Orchard < 1.6
-            //TODO: discontinue in 2013 Q2
-            Version orchardVersion = Utils.GetOrchardVersion();
-            if (orchardVersion < new Version(1, 6)) {
-                returnUrl = Url.Encode(returnUrl);
-            }
-            else {
-                if (!returnUrl.StartsWith("~/")) {
-                    returnUrl = "~/" + returnUrl;
-                }
+            if (!returnUrl.StartsWith("~/")) {
+                returnUrl = "~/" + returnUrl;
             }
 
             return this.RedirectLocal(returnUrl);
