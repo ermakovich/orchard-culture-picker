@@ -118,7 +118,6 @@
     <Compile Include="Drivers\CulturePickerPartDriver.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\CulturePickerPart.cs" />
-    <Compile Include="Projections\CurrentCultureFilter.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\ContentCultureSelector.cs" />
     <Compile Include="Services\ILocalizableContentService.cs" />
