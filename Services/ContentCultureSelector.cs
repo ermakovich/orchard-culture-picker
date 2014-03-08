@@ -48,6 +48,7 @@ namespace Orchard.CulturePicker.Services {
             var routeValueDictionary = context.Request.RequestContext.RouteData.Values;
 
             if (routeValueDictionary == null
+                || (routeValueDictionary["controller"] as string) != "Item"
                 || String.IsNullOrEmpty(routeValueDictionary["Id"] as string)) {
                 return null;
             }
